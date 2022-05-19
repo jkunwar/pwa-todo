@@ -1,0 +1,63 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+
+input {
+    padding: 8px;
+}
+
+.form button {
+    margin-top: 5px;
+    background-color: #008CBA;
+    color: #fff;
+    padding: 10px 0px;
+    border: none;
+    cursor: pointer;
+}
+
+.todo-list {
+    margin-top: 10px;
+}
+
+#todoItems {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list-item {
+    padding: 10px;
+    cursor: pointer;
+    background-color: antiquewhite;
+}
+
+.line-through {
+    text-decoration: line-through;
+}
+
+.list-item:not(:last-child) {
+    border-bottom: 1px solid purple;
+}
+
+@media only screen and (orientation: landscape) {
+    .form {
+        width: 500px;
+    }
+}
