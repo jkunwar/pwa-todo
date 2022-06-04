@@ -7,30 +7,66 @@ if ('serviceWorker' in navigator) {
 } else {
     console.log('Service worker is not supported.')
 }
-
 const todoItemContainer = document.getElementById('todoItems');
+
+const items = getFromLocalStorage('todoItems');
+const todoItems = items ? JSON.parse(items) : [];
+if (todoItems) {
+    todoItems.forEach(todo => generateHTMLForTodoList(todo))
+}
+
 function handleAddClick(event) {
     const newItem = document.getElementsByName('task')[0].value;
 
     if (!newItem) return;
 
+    const item = { title: newItem, isComplete: false };
+    generateHTMLForTodoList(item)
+
+    todoItems.push(item)
+    setToLocalStorage('todoItems', JSON.stringify(todoItems))
+}
+
+function generateHTMLForTodoList(item) {
     //create new element
     const listItem = document.createElement('li');
     listItem.className = 'list-item';
     listItem.addEventListener('click', compleTask);
-    const node = document.createTextNode(newItem);
+    const node = document.createTextNode(item.title);
+    if (item.isComplete) {
+        listItem.classList.add('line-through')
+    }
     listItem.appendChild(node);
 
     //append new element to todoItem
-    todoItemContainer.appendChild(listItem);
+    todoItemContainer.prepend(listItem);
 }
 
 //Helper function to mark task as complete or in-complete
 function compleTask() {
-    const item = this;
-    if (item.classList.contains('line-through')) {
-        item.classList.remove('line-through')
+    const selectedItem = this;
+    const isTaskCompleted = selectedItem.classList.contains('line-through')
+    if (isTaskCompleted) {
+        selectedItem.classList.remove('line-through')
     } else {
-        item.classList.add('line-through')
+        selectedItem.classList.add('line-through')
     }
+
+    todoItems.map(todoItem => {
+        if (selectedItem.textContent == todoItem.title) {
+            todoItem.isComplete = !isTaskCompleted
+        }
+
+        return todoItem
+    })
+
+    setToLocalStorage('todoItems', JSON.stringify(todoItems))
+}
+
+function getFromLocalStorage(key) {
+    return window.localStorage.getItem(key)
+}
+
+function setToLocalStorage(key, value) {
+    window.localStorage.setItem(key, value)
 }
