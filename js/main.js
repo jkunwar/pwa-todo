@@ -70,15 +70,3 @@ function getFromLocalStorage(key) {
 function setToLocalStorage(key, value) {
     window.localStorage.setItem(key, value)
 }
-
-window.addEventListener('online', () => {
-    console.log('cdcskcnj')
-    const internetStatus = document.getElementById('internetStatus')
-    internetStatus.style.display = 'none'
-});
-
-window.addEventListener('offline', () => {
-    console.log('cdnsjhn')
-    const internetStatus = document.getElementById('internetStatus')
-    internetStatus.style.display = 'block'
-});

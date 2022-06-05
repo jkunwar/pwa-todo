@@ -72,7 +72,10 @@
 
 <body>
     <div class="container">
-        <h5>My TODO List</h5>
+        <div class="header">
+            <img src="images/tick.png" alt="tick">
+            <h5>My TODO List</h5>
+        </div>
         <div class="form">
             <input type="text" name="task" placeholder="Learn React">
             <button type="button" onclick="handleAddClick(event)">Add Item</button>
@@ -82,9 +85,6 @@
         </div>
     </div>
 
-    <div class="offline-status" id="internetStatus">
-        <p>Internet connection failed</p>
-    </div>
     <script src="js/main.js"></script>
 </body>
 

@@ -12,12 +12,14 @@ self.addEventListener('install', (event) => {
                 '/pwa-todo/js/main.js',
                 '/pwa-todo/manifest.json',
                 '/pwa-todo/icons/favicon-196.png',
+                '/pwa-todo/images/tick.png',
             ])
         })
     );
 });
 
 self.addEventListener('activate', (event) => {
+
     event.waitUntil(caches.keys().then(cacheNames => {
         return Promise.all(cacheNames.filter(cacheName => cacheName != CACHE_NAME).map(item => caches.delete(item)))
     }))
